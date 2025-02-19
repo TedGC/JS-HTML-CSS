@@ -1,0 +1,42 @@
+//FEB 19 LEARNING 
+
+
+
+const h1 = document.querySelector('h1')
+const changeColor = function () {
+    h1.style.color = this.style.backgroundColor;
+}
+const container = document.querySelector('#boxes');
+
+for (let color of colors) {
+    const box = document.createElement('div')
+    box.style.backgroundColor = color;
+    box.classList.add('box');
+    container.appendChild(box);
+    box.addEventListner('click', changeColor)
+}
+}
+
+document.body.addEventListener('keypress', function (e) {
+    console.log(e);
+})
+
+const input = document.querySelector('#username')
+
+input.addEventListener('keydown', function (e) {
+    console.log('key down bro')
+})
+
+const addItemInput = document.querySelector('#addItem');
+const itemsUL = document.querySelector('#items');
+
+addItemInput.addEventListener('keypress', function () {
+    if (e.key === 'Enter') {
+        if (!this.value) return;
+        const newItemText = this.value;
+        const newItem = document.createElement('li')
+        newItem.innerText = newItemText;
+        itemsUL.appendChild(newItem);
+        this.value = '';
+    }
+})
