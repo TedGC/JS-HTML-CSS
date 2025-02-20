@@ -40,3 +40,162 @@ addItemInput.addEventListener('keypress', function () {
         this.value = '';
     }
 })
+
+const moveX = (element, amount, delay, callback) => {
+    setTimeout(() => {
+        element.style.transform = 'translateX(${amount})'
+    if(callback) callback();
+    }, dealy)
+}
+
+moveX(btn, 600, 200, () => {
+    movex(btn, 200, 1000);
+})
+
+//Promise 
+const makeNewPromise = () =>{
+    return new Promise((resolve, reject) => {
+    const rand = Math.radnom();
+    if(rand < 0.5) {
+    resolve()
+    } else {
+    reject();
+}
+})};
+
+makeNewPromise()
+    .then(() => {
+    console.log('successful')
+}
+    .catch(() =>{
+    console.log('get back up and do it again')
+    }
+
+const fakeRequest = (url) =>{
+    return new Promise((resolve, rejst) => {
+    setTimeout(() =>{
+        const pages = [
+            {id: 1, username:'amanada'),
+            {id: 5, username: 'great'}
+        ],
+        '/about' : 'This is the about page!'
+    }
+        const data = pages[url];
+        if(data) {
+            revolse({ status: 200, data})
+        }
+        else {
+            reject({ status: 404})
+        }
+    }, 1000;
+)
+}
+
+fakeRequest('/users')
+    .then((res) =>{
+        console.log('Status Code', res.status);
+        console.log('Data', res.data)
+    })
+    .catch((res) => {
+        console.log(res.status);
+        console.log('Request Failed')
+    })
+
+fakeRequest('/user')
+    .then((res) =>{
+        console.log(res)
+        const id = res.data[0].id;
+        return fakeRequest('/users/${id})}
+    .then((res) => {
+        console.log(res)
+        const postId = res.data.topPostId;
+        fakeRequest('/posts/${postId})})
+    .then((res) =>{
+        console.log(res)
+        })
+    .cathc((err) =>{
+        console.log('oh no', err)
+        })
+
+
+const btn = document.querySelector('button');
+const moveX = (element, amount, delay) => {
+    return new Promise((resolve, reject) => {
+    setTimeout(() =>{
+        const bodyBoundary = document.body.clientWidth;
+        const elright = element.getBoundingClientRect().right;
+        const currLeft = element.getBoundingClientRect().left;
+            if(elRight + amount > bodyBoundary){
+                reject();
+            }
+            else {
+                element.style.transform = `translatex${currLeft +amount}px`
+                resolve();
+            }
+            
+    }, delay)
+}
+    }
+moveX(btn, 300, 1000)
+    .then(() =>{
+        return moveX(btn, 300, 1000)})
+    .then(() =>{
+        console.log('done with that')
+    }
+    .catch(() =>{
+        console.log('cannot move')
+    })
+
+//XMLHttpRequest method 
+
+const firstReq new XMLHttpRequest ();
+firstReq.addEventListener('load', function() {
+    console.log('FIRST REQUEST WORKED');
+    const data = JSON.parse(this.responseText)'
+    const filmURL = data.results[0].films[0]
+    const filmReq = new XMLHttpRequest()
+    filmReq.addEventListener('load', function() {
+        console.log('SECOND REQUEST WORKED!')
+        const filmData = JSON.parse(this.responseText)
+        console.log(filmData)
+    })
+    filmReq.addEventListener('error', function(e) {
+        console.log('ERROR!', e)
+    })
+    filmReq.open('GET', filmURL)
+    filmReq.send()
+})
+firstReq.addEventListener('error', () =>{
+    console.log('error)
+})
+firstReq.open('GET', 'url goes here')
+firstReq.send()
+console.log('Request Sent!')
+
+//FETCH API 
+
+fetch('url')
+    .then((res) => {
+        if(!response.ok) {
+            throw new Error(`Status code errr: ${response.status}`);
+        }
+        return res.json()
+        });
+    .then((data)=> {
+      const filmURL = data.results[0].films[0];
+        return fetch[filmURL]
+    }});
+    .then((res) => {
+        if(!response.ok) {
+            throw new Error(`Status code errr: ${response.status}`);
+        }
+        return res.json()
+        });
+    .then((data) => {
+        console.log(data.title)
+    })
+
+    .catch(err) =>{
+        console.log('something went worng with fetch')'
+        console.log(err);
+    }
