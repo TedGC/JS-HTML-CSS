@@ -74,3 +74,39 @@ console.log(test.function())
 
 //TIMER APPLICATION 
 
+
+//FETCH REFACTORING METHOD 
+
+const checkStatusAndParse = (res) =>{
+if(!response.ok) throw new Error(`Status Code Error: ${res.status})
+    return response.json()
+}
+const printPlanets = (data) =>{
+    console.log('loaded another 10 planets')
+    for(let planet of data.results) {
+        console.log(planet.name);
+    }
+    return Promise.resolve(data.next);
+}
+const fetchNextPlanets = (url) =>{
+    return fetch(url)
+}
+
+fetchNextPlanets() *only if there is a default url to fetch at*
+    .then(checkStatusAndParse)
+    .then(printPlanets)
+    .then(fetchNextPlanets) 
+    .catch(err) =>{
+        console.log(err);
+    }
+//AXIOS method 
+
+
+fetchNextPlanets() 
+  .then(checkStatusAndParse)
+  .then(printPlanets)
+  .then(fetchNextPlanets)
+  .catch(err) =>{
+    console.log(err)
+  }
+
