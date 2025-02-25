@@ -1,4 +1,4 @@
-const createAutoComplet = ({ root }) =>{
+const createAutoComplete = ({ root, rendorOption }) =>{
 
   root.innerHTML = `
     <label><b> Serach for a moive</b></label>
@@ -29,9 +29,7 @@ const onInput = aysnc e => {
         const option = document.createElement('a');
         const imgSrc = movie.Poster === 'N/A' ? '' : movie.Poster;
         option.classList.add('dropdown-item')
-        option.innerHTML= `
-            <img src="${imgSrc}" />
-            ${movie.Title} ` 
+        option.innerHTML= rendorOption(movie)
 
         option.addEventListener('click', () =>{
             dropdown.classList.remove('is-active')
