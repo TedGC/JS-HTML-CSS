@@ -1,50 +1,53 @@
-const createAutoComplete = ({ root, rendorOption }) =>{
-
-  root.innerHTML = `
-    <label><b> Serach for a moive</b></label>
-    <input class="input"/>
+const createAutoComplete = ({
+    root,
+    renderOption,
+    onOptionSelect,
+    inputValue,
+    fetchData }) => {
+    root.innerHTML = `
+    <label><b>Search</b></label>
+    <input class="input" />
     <div class="dropdown">
-        <div class="dropdwon-menu">
-            <div class="dropdwon-content reults"></div>
-        </div>
+      <div class="dropdown-menu">
+        <div class="dropdown-content results"></div>
+      </div>
     </div>
-`;
-// debouncing an input 
-const input = root.querySelector('input')
-const dropdown = root.querySeletor('.dropdown');
-const resultsWrapper = root.querySelector('.results')
+  `;
 
+    const input = root.querySelector('input');
+    const dropdown = root.querySelector('.dropdown');
+    const resultsWrapper = root.querySelector('.results');
 
-const onInput = aysnc e => {
-    const movies = await fetchData(e.target.value);
+    const onInput = async event => {
+        const items = await fetchData(event.target.value);
 
-    if(!movies.lengt) {
-        dropdonw.classList.remove('is-active');
-        return;
-    }
-    
-    resultsWrapper.innerHTML ='';
-    dropdown.classList.add('is-active')
-    for (let movie of movies) {
-        const option = document.createElement('a');
-        const imgSrc = movie.Poster === 'N/A' ? '' : movie.Poster;
-        option.classList.add('dropdown-item')
-        option.innerHTML= rendorOption(movie)
-
-        option.addEventListener('click', () =>{
-            dropdown.classList.remove('is-active')
-            input.value = movie.Title;
-            onMovieSelect(movie);
+        if (!items.length) {
+            dropdown.classList.remove('is-active');
+            return;
         }
-        resultsWrapper.appendChild(option)
-    }
-}
-input.addEventListener('input', debounce(onInput, 500))
 
-document.addEventListener('click', event ()=>{
-    if(!root.contains(event.target)) {
-        dropdown.classList.remove('is-active')
-    }
-})
+        resultsWrapper.innerHTML = '';
+        dropdown.classList.add('is-active');
+        for (let item of items) {
+            const option = document.createElement('a');
+            const imgSrc = item.Poster === 'N/A' ? '' : item.Poster;
 
-}
+            option.classList.add('dropdown-item');
+            option.innerHTML = renderOption(item)
+            option.addEventListener('click', () => {
+                dropdown.classList.remove('is-active');
+                input.value = inputValue(item)
+                onOptionSelect(item);
+            });
+
+            resultsWrapper.appendChild(option);
+        }
+    };
+    input.addEventListener('input', debounce(onInput, 500));
+
+    document.addEventListener('click', event => {
+        if (!root.contains(event.target)) {
+            dropdown.classList.remove('is-active');
+        }
+    });
+};
