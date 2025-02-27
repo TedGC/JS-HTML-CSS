@@ -51,5 +51,22 @@ const startRow = Math.floor(Math.random() * cells);
 const startColumn = Math.floor(Math.random() * cells);
 
 const stepThroughCell = (row, column) => {
-    
+    if (grid[row][column]) {
+        return; 
+    }
 }
+
+const shuffle = (arr) =>{
+    let counter = arr.length;
+
+    while (counter > 0) {
+        const index = Math.floor(Math.random() * counter);
+        
+        counter-- ;
+
+        const temp = arr[counter];
+        arr[counter] = arr[index];
+        arr[index] = temp;
+    }
+}
+grid[row][column] = true; 
