@@ -217,7 +217,7 @@ document.addEventListener('keydown', event => {
 // winning the game condition
 
 Events.on(engine, 'collisionStart', event => {
-    event.pairs.forEach((collision) =>) {
+    event.pairs.forEach((collision) => {
         const labels = ['ball', 'goal'];
 
         if(
@@ -233,4 +233,4 @@ Events.on(engine, 'collisionStart', event => {
                 })
     }
     }
-})
+)
