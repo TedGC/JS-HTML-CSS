@@ -1,17 +1,11 @@
-const fs = require('fs');
-
-fs.readdir('.', (err, filenames) => {
-    if(err) {
-        console.log(err)
-    }
-})
-
 console.log(err);
 
 const fs = require('fs')
 const util = require('util')
+const chalk = require('chalk')
 
 
+console.log(process.argv)
 //Method #3
 // const {lstat} = fs.promises;
 
@@ -47,7 +41,11 @@ const allStats = await Promise.all(statPromises);
 for (let stats of allStats) {
     const index = allStats.indexOf(stats);
 
-    console.log(filenames[index], stats.isFile());
+    if (stats.isFile()) {
+        console.log(filenames[index]);
+    } else {
+        console.log(chalk.bold(filenames[index]))
+    }
 }
 
 
