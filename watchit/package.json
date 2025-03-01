@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "chalk": "^5.4.1"
+  },
+  "name": "coding-learning-repository",
+  "version": "1.0.0",
+  "description": "Coding Learning Repository",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TedGC/Coding-Learning-Repository.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "watchit": "index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/TedGC/Coding-Learning-Repository/issues"
+  },
+  "homepage": "https://github.com/TedGC/Coding-Learning-Repository#readme"
+}
