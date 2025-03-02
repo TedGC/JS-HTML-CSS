@@ -1,4 +1,4 @@
-lass Clock {
+class Clock {
     constructor(durationInput, startButton, pauseButton, callbacks) {
         this.durationInput = durationInput;
         this.startButton = startButton;
@@ -69,15 +69,15 @@ const clock = new Clock(durationInput, startButton, pauseButton, {
 })
 
 
-// SVG portin of the application 
-<svg height="200" width="200">
-    <circle
-        r="190"
-        cx="200"
-        cy="200"
-        fill="transparent"
-        stroke="blue"
-        // stroke-width="565"
-        // stroke-dasharray="-10"
-        transform="rotate(-90 200 200)" />
-</svg>
+    // SVG portin of the application 
+    < svg height = "200" width = "200" >
+        <circle
+            r="190"
+            cx="200"
+            cy="200"
+            fill="transparent"
+            stroke="blue"
+            // stroke-width="565"
+            // stroke-dasharray="-10"
+            transform="rotate(-90 200 200)" />
+</svg >
