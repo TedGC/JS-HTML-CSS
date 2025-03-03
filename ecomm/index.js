@@ -1,6 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser')
+const usersRepo = require('./repo/users')
+
 const app = express()
+
 
 //all of the middleware inside this app will use this app.use for than function to run 
 // globally this function to all middleware 
@@ -18,6 +21,32 @@ app.get('/', (req, res) => {
     </div>
     `)
 })
+
+app.post('/', async (req, res) => {
+    const { email, password, passwordConfirmation } = req.body;
+
+    const existingUser = await usersRepo.getOneBy({ email })
+    if (existingUser) {
+        return res.send('Email in use');
+    }
+
+    if (password !== passwordConfirmation) {
+        return res.send('passwords must match')
+    }
+
+    res.send('account created!')
+})
+
+app.listen(3000, () => {
+    console.log('listening')
+})
+
+
+
+// bodyParser.urlencoded({ extended: true }), (req, res) => {
+//     console.log(req.body)
+//     res.send('account created');
+// })
 
 
 //manual approach for parsing method from Express from scratch instead of using 
@@ -41,14 +70,6 @@ app.get('/', (req, res) => {
 
 // }
 
-app.post('/', bodyParser.urlencoded({ extended: true }), (req, res) => {
-    console.log(req.body)
-    res.send('account created');
-})
-
-app.listen(3000, () => {
-    console.log('listening')
-})
 
 // setting up json file in hard drive as a method of storage so that we don't have to 
 //dumpt our files into the memories whenever we run the program is not efficient 
