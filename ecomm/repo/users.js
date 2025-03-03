@@ -29,6 +29,8 @@ class UsersRepository {
         //write the udpated 'records' array back to this.filename
 
         await this.wirteAll(records);
+
+        return attrs;
     }
 
     async wirteAll(records) {
