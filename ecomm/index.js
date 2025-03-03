@@ -20,7 +20,8 @@ app.get('/', (req, res) => {
 })
 
 
-//manual approach for parsing method from Express 
+//manual approach for parsing method from Express from scratch instead of using 
+// utilizing the module in the library 
 
 // const bodyParser = (req, res, next) => {
 //     if (req.method === 'POST') {
@@ -48,4 +49,11 @@ app.post('/', bodyParser.urlencoded({ extended: true }), (req, res) => {
 app.listen(3000, () => {
     console.log('listening')
 })
+
+// setting up json file in hard drive as a method of storage so that we don't have to 
+//dumpt our files into the memories whenever we run the program is not efficient 
+// for the reasosn below 
+// 1. will error it we try to open/write to the smae file twice at the same file
+// 2. won't work if we have multiple servers running on different machines
+// 3. we have to write to the FS every time we want to update some data 
 
