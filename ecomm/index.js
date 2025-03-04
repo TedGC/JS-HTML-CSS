@@ -3,9 +3,12 @@ const bodyParser = require('body-parser')
 const cookieSession = require('cookie-session');
 
 const authRouter = require('./routes/admin/auth')
-
+const productRouter = require('./routes/admin/products')
 
 const app = express()
+
+app.use(express.static('public'))
+
 //all of the middleware inside this app will use this app.use for than function to run 
 // globally this function to all middleware 
 app.use(bodyParser.urlencoded({ extendedL: true }));
@@ -13,8 +16,10 @@ app.use(cookieSession({
     keys: ['dhksdfnaslkdf']
 }))
 
-
 app.use(authRouter)
+
+app.use(productRouter)
+
 
 app.listen(3000, () => {
     console.log('listening')
