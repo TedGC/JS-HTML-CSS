@@ -1,5 +1,7 @@
 const express = require('express');
-const { check, validationResult } = require('express-validator')
+
+
+const { handleErrors } = require('./middleware')
 const usersRepo = require('../../repo/users')
 const signupTemplate = require('../../view/admin/auth/signup')
 const router = express.Router();
@@ -26,13 +28,16 @@ router.post('/signup',
         requirePassword,
         requirePasswordConfirmation
     ],
+    handleErrors(signupTemplate),
     async (req, res) => {
-        const errors = validationResult(req);
-        console.log(errors);
-        if (!errors.isEmpty()) {
-            return res.send(signupTemplate({ req, errors }))
-        }
-        const { email, password, passwordConfirmation } = req.body;
+        // const errors = validationResult(req);
+        // console.log(errors);
+        // if (!errors.isEmpty()) {
+        //     return res.send(signupTemplate({ req, errors }))
+        // }
+
+        //used to be 'passwordconfirmation property in this deconsdtructor
+        const { email, password } = req.body;
 
         //create a user in our user repo to represent this person
         const user = await usersRepo.create({ email, password })
@@ -64,14 +69,15 @@ router.post('/signin', [
     requireValidPasswordsForUser
 
 ],
+    handleErrors(signinTemplate),
 
     async (req, res) => {
 
-        const errors = validationResult(req);
+        // const errors = validationResult(req);
 
-        if (!errors.isEmpty()) {
-            return res.send(signinTemplate({ errors }))
-        }
+        // if (!errors.isEmpty()) {
+        //     return res.send(signinTemplate({ errors }))
+        // }
 
         const { email } = req.body;
 
