@@ -1,49 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser')
-const usersRepo = require('./repo/users')
 const cookieSession = require('cookie-session');
+
+const authRouter = require('./routes/admin/auth')
+
+
 const app = express()
-
-
 //all of the middleware inside this app will use this app.use for than function to run 
 // globally this function to all middleware 
 app.use(bodyParser.urlencoded({ extendedL: true }));
 app.use(cookieSession({
     keys: ['dhksdfnaslkdf']
 }))
-app.get('/', (req, res) => {
-    res.send(`
-    <div>
-        <form method="POST">
-            <input name="email" placeholder="email"/>
-            <input name="password" placeholder="password"/>
-            <input name="passwordConfirmation" placeholder="password confirmation"/>
-            <button>sign up </button>
-        </form>
-    </div>
-    `)
-})
 
-app.post('/', async (req, res) => {
-    const { email, password, passwordConfirmation } = req.body;
 
-    const existingUser = await usersRepo.getOneBy({ email })
-    if (existingUser) {
-        return res.send('Email in use');
-    }
-
-    if (password !== passwordConfirmation) {
-        return res.send('passwords must match')
-    }
-
-    //create a user in our user repo to represent this person
-    const user = await usersRepo.create({ email, password })
-
-    //sotre the id of that user inside the users cookie
-    req.session.userId = user.id;
-
-    res.send('account created!')
-})
+app.use(authRouter)
 
 app.listen(3000, () => {
     console.log('listening')
