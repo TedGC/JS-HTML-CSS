@@ -78,6 +78,13 @@ router.post('/signin', [
         //     return res.send(signinTemplate({ errors }))
         // }
 
+        /// fix #1 to solve the issue for router.get('./admin/products)
+        // 1. I first made the change to the link path  from './admin/products' to '/admin/products/index
+        // 2. enables const user = await usersRepo.getOneBy({email}) below which was once disabled as instructed from the course
+        // 3. I updated this function in products.js into the ternary function const image = req.file ? req.file.buffer.toString('base64') : '';
+        // 4. I added    else { return true   statement in "requirePasswordConfirmation" in validators.js
+        // #4 has more to do with adding hash values to the password 
+        // 5. 
         const { email } = req.body;
         const user = await usersRepo.getOneBy({ email })
         // no need to pull off 'password' property from req.body 
