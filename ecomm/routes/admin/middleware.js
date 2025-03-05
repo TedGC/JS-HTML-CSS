@@ -1,12 +1,18 @@
 const { validationResult } = require('express-validator')
 
 module.exports = {
-    handleErrors(templateFunc) {
-        return (req, res, next) => {
+    handleErrors(templateFunc, dataCb) {
+        return async (req, res, next) => {
             const errors = validationResult(req);
-
+            // need to undderstnad the logic here. 
+            //I don't quite get it at first seeing it
             if (!errors.isEmpty()) {
-                return res.send(templateFunc({ errors }))
+                let data = {};
+                if (dataCb) {
+                    data = await dataCb(req)
+                }
+
+                return res.send(templateFunc({ errors, ...data }))
             }
 
             next();
