@@ -4,12 +4,17 @@
   },
   {
     "email": "gwangsu@gmail.com",
-    "password": "password",
+    "password": "",
     "id": "eac70d30"
   },
   {
     "email": "test@google.com",
     "password": "password",
     "id": "7abd8ba7"
+  },
+  {
+    "email": "test@yahoo.com",
+    "password": "903045659df55137dc3387cf9f3c84b18740d436014307ec3a5e31e8ac8954bca78ac7ab970b0d46c55262292594c5e2a12ddf7660817ad7a2f115afde9cd36f.ce703738b7953a86}",
+    "id": "0dc85fdd"
   }
 ]

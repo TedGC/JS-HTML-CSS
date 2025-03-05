@@ -6,6 +6,14 @@ const usersRepo = require('../../repo/users')
 //ease of reference and future update/modification
 
 module.exports = {
+    // requireImage:
+    //     check('image')
+    //         .custom(async (image, { req }) => {
+    //             const img = await req.file
+    //             if (!img) {
+    //                 throw new Error('please upload an image')
+    //             }
+    //         }),
     requireTitle:
         check('title')
             .trim()
@@ -44,7 +52,9 @@ module.exports = {
             .custom((passwordConfirmation, { req }) => {
                 if (passwordConfirmation !== req.body.password) {
                     throw new Error('Passwords must match')
-                }
+                } else {
+                    return true
+                }  //fixed by adding in "else statement"
             }),
 
     requireEmailExists:

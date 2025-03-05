@@ -4,7 +4,6 @@ const express = require('express');
 const { handleErrors } = require('./middleware')
 const usersRepo = require('../../repo/users')
 const signupTemplate = require('../../view/admin/auth/signup')
-const router = express.Router();
 const signinTemplate = require('../../view/admin/auth/signin')
 const {
     requireEmail,
@@ -14,7 +13,7 @@ const {
     requireEmailExists
 } = require('./validators')
 
-
+const router = express.Router();
 //signup template for future structuring of the application
 router.get('/signup', (req, res) => {
     res.send(signupTemplate({ req }))
@@ -45,7 +44,7 @@ router.post('/signup',
         //store the id of that user inside the users cookie
         req.session.userId = user.id;
 
-        res.send('account created!')
+        res.redirect('/admin/products')
     })
 
 
@@ -80,7 +79,7 @@ router.post('/signin', [
         // }
 
         const { email } = req.body;
-
+        const user = await usersRepo.getOneBy({ email })
         // no need to pull off 'password' property from req.body 
         // becasue it's already covered in the validator section
         //const {email, password} = req.body;
@@ -91,9 +90,11 @@ router.post('/signin', [
         //     return res.send('email not found');
         // }
 
-        req.session.userId = req.body.id;
 
-        res.send('you are signed in')
+
+        req.session.userId = user.id;
+
+        res.redirect('/admin/products')
     })
 
 module.exports = router;
