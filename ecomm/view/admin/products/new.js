@@ -27,7 +27,6 @@ module.exports = ({ errors }) => {
               <label class="label">Image</label>            
               <input type="file" name="image" />
             </div>
-            <br />
             <button class="button is-primary">Create</button>
           </form>
         </div>
