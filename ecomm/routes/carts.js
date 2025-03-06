@@ -58,6 +58,8 @@ router.get('/cart', async (req, res) => {
     for (let item of cart.items) {
         const product = await productsRepo.getOne(item.id)
 
+
+        // I might need to figure out what this function does
         item.product = product;
     }
 
