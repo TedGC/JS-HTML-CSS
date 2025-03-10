@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Forms</h1>
+    <button type="button">regular button without type indicated won't do anything'</button>
+    <form action="/tacos">
+        <p>
+            <label for="username">enter a username</label>
+            <input id="username" type="text" placeholder="username">
+        </p>
+        <p>
+            <label for="passwrod">enter a password</label>
+            <input type="password">
+        </p>
+        <input type="color">
+        <input type="time" placeholder="enter a number">
+
+    </form>
+
+    <button>not inside form</button>
+    <form action="https://www.reddit.com/search">
+        <input type="text" name="q">
+        <button>search reddit</button>
+    </form>
+    </form>
+
+
+    <form action="https://www.google.com/search">
+        <input type="text" name="q">
+        <button>search google</button>
+    </form>
+    </form>
+
+    <form action="https://www.youtube.com/results">
+        <input type="text" name="search_query">
+        <button>search yotuube</button>
+    </form>
+
+    <h2>More input!</h2>
+    <form action="/birds">
+        <input type="checkbox" name="agree_tos" id="agree">
+        <label for="agree">I agree to everything</label>
+        <p>
+            <label for="xs">XS:</label>
+            <input type="radio" name="size" id="xs" value="xs">
+            <label for="s">S</label>
+            <input type="radio" name="size" id="s" value="s">
+            <label for="m">M</label>
+            <input type="radio" name="size" id="m" value="m">
+        </p>
+        <button type="button"></button>
+    </form>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
+
+
+
+<! -- note <input>
+    - -->
