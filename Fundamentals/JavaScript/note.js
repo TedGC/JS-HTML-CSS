@@ -83,7 +83,13 @@
  * )
  * 
  * 
+ * arguement is what we pass inside the parentheses when we exectue the function
+ * parameter is just the placehoder variable that we define for use inside of
+ * our function definition 
  * 
+ * RETURN
  * 
+ * the return statement ends function execution and specifies the value to be 
+ * returned by that function 
  * 
  *  */
