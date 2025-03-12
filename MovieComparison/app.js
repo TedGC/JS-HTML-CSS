@@ -10,6 +10,9 @@ const autoCompleteConfig = {
         return movie.Title;
     },
 
+
+    // simplifying HTTP requests with a promise-based API, automatic JSON transformation, //
+    // interceptors for handling requests and responses, request cancellation, and robust error handling
     async fetchData(searchTerm) {
         const response = await axios.get('http://www.omdbapi.com/', {
             params: {
@@ -18,14 +21,19 @@ const autoCompleteConfig = {
             }
         });
 
+        // this is to check if the fetching data is successful. Otherwise, return an emply array to make sure
+        // it is actually working
         if (response.data.Error) {
             return [];
         }
-
+        // if not resulted in an errot, fetch the Search functionality to run the search engine provided from
+        // the api provider
         return response.data.Search;
         ;
     }
 }
+
+
 
 createAutoComplete({
     ...autoCompleteConfig,
