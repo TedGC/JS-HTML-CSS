@@ -64,6 +64,17 @@ function App() {
  *   ex. import App, {message} from './App
  * 3. named exprots cannot be renamed 
  * 
+ * props system
+ * 
+ * 1. pass data from a parent to a child
+ * 2. allows a parent to configure each child differently
+ *     (show different text, different styles, ect)
+ * 3. one way flow of data. Child can't push props back up
+ * 4. Like 25% of understanding React 
+ * 
+ * parent component ---- (props) ----> child component
+ * 
+ * 
  * 
  */
 root.render(<App />)
