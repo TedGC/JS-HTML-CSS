@@ -92,4 +92,17 @@
  * the return statement ends function execution and specifies the value to be 
  * returned by that function 
  * 
+ * 
+ * RESTful apis and other functions to communicate with the server
+ * 
+ * GET /comments - list all comments
+ * POST /commnets - Create a new comment 
+ * GET / comments/:id - get one comment (using Id)
+ * PATCH / comments/:id - update one comment
+ * DELETE / comments /:id - destory one comment 
+ * 
+ * 
+ * 
+ * 
+ * 
  *  */
