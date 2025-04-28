@@ -1,14 +1,28 @@
-const multiply = (x, y) => x * y;
+const form = document.querySelector('#searchForm')
+form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    const searchTerm = form.elements.query.value
+    const res = await Axios.get(`https://api.tvmaze.com/search/shows?q=${searchTerm}`)
+    console.log(res.data)
+})
 
-const square = x => multiply(x, x);
+// https://api.tvmaze.com/search/shows?q=girls
 
-const isRightTriangle = (a, b, c) => (
-    square(a) + square(b) === square(c)
-)
-console.log("BEFORE")
-isRightTriangle(3, 4, 5)
 
-console.log("DONEEEE!")
+
+
+
+// const multiply = (x, y) => x * y;
+
+// const square = x => multiply(x, x);
+
+// const isRightTriangle = (a, b, c) => (
+//     square(a) + square(b) === square(c)
+// )
+// console.log("BEFORE")
+// isRightTriangle(3, 4, 5)
+
+// console.log("DONEEEE!")
 
 
 /**
