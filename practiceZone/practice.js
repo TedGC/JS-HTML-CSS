@@ -100,3 +100,78 @@ class TimeComponent extends Component {
       return <h3>Current Time: {this.state.time} </h3>;
     }
   }
+
+// need to understand the difference between using this vs 
+// just going straight into using map loop[ing over]
+
+  const posts = [
+    { id: 10, title: "Link One" },
+    { id: 20, title: "Link Two" },
+    { id: 30, title: "Link Three" }
+  ];
+  
+  export default function App() {
+    return (
+      <ul>
+        {posts.map(function (post) {
+          return (
+            <li key={post.id}>
+              <a href={"/posts/" + post.id}>{post.title}</a>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
+  
+
+
+  class App extends Component {
+    state = {
+      file: null
+    };
+  
+    handleFile(e) {
+      let file = e.target.files[0];
+      this.setState({ file });
+    }
+    async handleUpload(e) {
+      console.log(this.state.file);
+      await uploadImage(this.state.file);
+    }
+  
+    render() {
+      return (
+        <div className="App">
+          <h1> File Upload in React </h1>
+          <input type="file" name="file" onChange={(e) => this.handleFile(e)} />
+          <button onClick={(e) => this.handleUpload(e)}>Upload</button>
+        </div>
+      );
+    }
+  }
+  
+  const uploadImage = async (file) => {
+    try {
+      console.log("Upload Image", file);
+      const formData = new FormData();
+      formData.append("filename", file);
+      formData.append("destination", "images");
+      formData.append("create_thumbnail", true);
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data"
+        }
+      };
+  
+      const url = "FILE_DIRECTORY";
+  
+      const result = await axios.post(url, formData, config);
+      console.log("REsult: ", result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  const rootElement = document.getElementById("root");
+  ReactDOM.render(<App />, rootElement);
