@@ -82,3 +82,21 @@ export default function App() {
     </div>
   );
 }
+
+
+class TimeComponent extends Component {
+    constructor(props) {
+      super(props);
+      this.state = { time: Date() };
+    }
+    componentDidMount() {
+      this.interval = setInterval(() => this.setState({ time: Date() }), 1000);
+    }
+    componentWillUnmount() {
+      clearInterval(this.interval);
+    }
+  
+    render() {
+      return <h3>Current Time: {this.state.time} </h3>;
+    }
+  }
