@@ -175,3 +175,30 @@ class TimeComponent extends Component {
   
   const rootElement = document.getElementById("root");
   ReactDOM.render(<App />, rootElement);
+
+
+
+  function App() {
+
+    const [value, setValue] = React.useState("");
+  
+    const handleOnChange = (event) => {
+      setValue(event.target.value);
+    };
+  
+    React.useEffect(() => {
+      const timeoutId = setTimeout(
+        () => console.log(`Search function called: "${value}"`),
+        300
+      );
+      return () => clearTimeout(timeoutId);
+    }, [value]);
+  
+    return (
+      <>
+        <input onChange={handleOnChange} value={value} placeholder="Search" />
+        <h1>{value}</h1>
+      </>
+    );
+  }
+  
