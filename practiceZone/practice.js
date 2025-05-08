@@ -442,3 +442,66 @@ app.post('/orders', async (req, res) => {
         'Missing data: Email, name, street, postal code or city is missing.',
     });
   }
+
+
+
+  const newOrder = {
+    ...orderData,
+    id: (Math.random() * 1000).toString(),
+  };
+  const orders = await fs.readFile('./data/orders.json', 'utf8');
+  const allOrders = JSON.parse(orders);
+  allOrders.push(newOrder);
+  await fs.writeFile('./data/orders.json', JSON.stringify(allOrders));
+  res.status(201).json({ message: 'Order created!' });
+});
+
+app.use((req, res) => {
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+
+  res.status(404).json({ message: 'Not found' });
+});
+
+app.listen(3000);
+
+
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: 'posts',
+        children: [
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<p>Loading...</p>}>
+                <BlogPage />
+              </Suspense>
+            ),
+            loader: () =>
+              import('./pages/Blog').then((module) => module.loader()),
+          },
+          {
+            path: ':id',
+            element: (
+              <Suspense fallback={<p>Loading...</p>}>
+                <PostPage />
+              </Suspense>
+            ),
+            loader: (meta) =>
+              import('./pages/Post').then((module) => module.loader(meta)),
+          },
+        ],
+      },
+    ],
+  },
+]);
