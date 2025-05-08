@@ -193,6 +193,8 @@ class TimeComponent extends Component {
       );
       return () => clearTimeout(timeoutId);
     }, [value]);
+
+    // this should be 
   
     return (
       <>
@@ -320,4 +322,30 @@ class App extends React.Component {
         </div>
       );
     }
+  }
+
+
+
+  export default function saveMeal(meals){
+    meals.slug = slugify(meals.title, {lower: true})
+    meals.description = xss(meals.description)
+
+    const extnesion = meals.image.name.split('.').pop()
+    const fileName = `${meals.slug} ${extension}`
+
+    const stream = fs.createWriteStream(`/public/images/${fileName}`)
+    const bufferedImage = meals.iamge.bufferArray()
+
+    stream.wrtieFile(Buffer.from(bufferedImage), (error) => {
+      if(error) {
+        throw new Error('error')
+      }
+    })
+
+    meals.image = `iamges.${fileName}`
+
+
+    db.prepare(`INSERT INTO meals (title, summary, name) VALUES (@title, @summary, @name)`).run()
+    )
+  }
   }
