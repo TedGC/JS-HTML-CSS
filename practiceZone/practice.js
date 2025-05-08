@@ -163,6 +163,8 @@ class TimeComponent extends Component {
           "content-type": "multipart/form-data"
         }
       };
+
+      formData.from(fs.entries())
   
       const url = "FILE_DIRECTORY";
   
@@ -194,7 +196,8 @@ class TimeComponent extends Component {
       return () => clearTimeout(timeoutId);
     }, [value]);
 
-    // this should be 
+    // this should be the dependencies such as state or props within the useEffect that may 
+    // be subject to the change of them 
   
     return (
       <>
