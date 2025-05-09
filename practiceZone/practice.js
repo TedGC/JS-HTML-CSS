@@ -650,3 +650,30 @@ export default function ErrorBlock({ title, message }) {
   );
 }
 }
+
+export default function EventDetails() {
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const { data, isPending, isError, error } = useQuery({
+    queryKey: ['events', params.id],
+    queryFn: ({ signal }) => fetchEvent({ signal, id: params.id }),
+  });
+
+  const {
+    mutate,
+    isPending: isPendingDeletion,
+    isError: isErrorDeleting,
+    error: deleteError,
+  } = useMutation({
+    mutationFn: deleteEvent,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['events'],
+        refetchType: 'none',
+      });
+      navigate('/events');
+    },
+  });
