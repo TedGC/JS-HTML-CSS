@@ -728,3 +728,50 @@ export default function EventDetails() {
           />
         </div>
       )}
+
+
+ <p className="control">
+        <label htmlFor="description">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          defaultValue={inputData?.description ?? ''}
+        />
+      </p>
+
+      <div className="controls-row">
+        <p className="control">
+          <label htmlFor="date">Date</label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            defaultValue={inputData?.date ?? ''}
+          />
+        </p>
+
+        <p className="control">
+          <label htmlFor="time">Time</label>
+          <input
+            type="time"
+            id="time"
+            name="time"
+            defaultValue={inputData?.time ?? ''}
+          />
+        </p>
+      </div>
+
+      <p className="control">
+        <label htmlFor="location">Location</label>
+        <input
+          type="text"
+          id="location"
+          name="location"
+          defaultValue={inputData?.location ?? ''}
+        />
+      </p>
+
+      <p className="form-actions">{children}</p>
+    </form>
+  );
+}
