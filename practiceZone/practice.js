@@ -677,3 +677,24 @@ export default function EventDetails() {
       navigate('/events');
     },
   });
+
+  export default function EventForm({ inputData, onSubmit, children }) {
+  const [selectedImage, setSelectedImage] = useState(inputData?.image);
+
+  const { data, isPending, isError } = useQuery({
+    queryKey: ['events-images'],
+    queryFn: fetchSelectableImages,
+  });
+
+  function handleSelectImage(image) {
+    setSelectedImage(image);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+
+    onSubmit({ ...data, image: selectedImage });
+  }
