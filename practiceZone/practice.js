@@ -698,3 +698,33 @@ export default function EventDetails() {
 
     onSubmit({ ...data, image: selectedImage });
   }
+
+
+  return (
+    <form id="event-form" onSubmit={handleSubmit}>
+      <p className="control">
+        <label htmlFor="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          defaultValue={inputData?.title ?? ''}
+        />
+      </p>
+
+      {isPending && <p>Loading selectable images...</p>}
+      {isError && (
+        <ErrorBlock
+          title="Failed to load selectable images"
+          message="Please try again later."
+        />
+      )}
+      {data && (
+        <div className="control">
+          <ImagePicker
+            images={data}
+            onSelect={handleSelectImage}
+            selectedImage={selectedImage}
+          />
+        </div>
+      )}
