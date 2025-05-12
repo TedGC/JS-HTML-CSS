@@ -775,3 +775,16 @@ export default function EventDetails() {
     </form>
   );
 }
+
+
+
+function EventForm({ method, event }) {
+  const data = useActionData();
+  const navigate = useNavigate();
+  const navigation = useNavigation();
+
+  const isSubmitting = navigation.state === 'submitting';
+
+  function cancelHandler() {
+    navigate('..');
+  }
