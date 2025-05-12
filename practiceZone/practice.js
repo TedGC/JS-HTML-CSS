@@ -892,3 +892,17 @@ export async function action({ request, params }) {
 
   return redirect('/events');
 }
+
+
+function EventItem({ event }) {
+  const token = useRouteLoaderData('root');
+  const submit = useSubmit();
+
+  function startDeleteHandler() {
+    const proceed = window.confirm('Are you sure?');
+
+    if (proceed) {
+      submit(null, { method: 'delete' });
+    }
+  }
+
