@@ -76,3 +76,40 @@ function Counter() {
     </div>
   );
 }
+
+
+import React, { createContext, useContext, useState } from 'react';
+
+const ThemeContext = createContext();
+
+function useTheme() {
+  return useContext(ThemeContext);
+}
+
+function ThemeProvider({ children }) {
+  const [dark, setDark] = useState(false);
+  const toggle = () => setDark(!dark);
+
+  return (
+    <ThemeContext.Provider value={{ dark, toggle }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+function ThemeToggler() {
+  const { dark, toggle } = useTheme();
+  return (
+    <button onClick={toggle}>
+      Switch to {dark ? 'Light' : 'Dark'} Mode
+    </button>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <ThemeToggler />
+    </ThemeProvider>
+  );
+}
