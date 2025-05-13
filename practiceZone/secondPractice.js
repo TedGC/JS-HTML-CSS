@@ -113,3 +113,28 @@ function App() {
     </ThemeProvider>
   );
 }
+
+
+import React, { useState, useEffect } from 'react';
+
+function PaginatedList() {
+  const [page, setPage] = useState(1);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/posts?_limit=5&_page=${page}`)
+      .then(res => res.json())
+      .then(setData);
+  }, [page]);
+
+  return (
+    <div>
+      <ul>
+        {data.map(post => <li key={post.id}>{post.title}</li>)}
+      </ul>
+      <button onClick={() => setPage(p => p - 1)} disabled={page === 1}>Prev</button>
+      <button onClick={() => setPage(p => p + 1)}>Next</button>
+    </div>
+  );
+}
+
