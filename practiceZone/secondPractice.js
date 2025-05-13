@@ -223,3 +223,25 @@ function FocusInput() {
   );
 }
 
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+
+function Modal({ children, onClose }) {
+  return ReactDOM.createPortal(
+    <div className="modal">
+      <div>{children}</div>
+      <button onClick={onClose}>Close</button>
+    </div>,
+    document.body
+  );
+}
+
+function App() {
+  const [open, setOpen] = useState(false);
+  return (
+    <div>
+      <button onClick={() => setOpen(true)}>Open Modal</button>
+      {open && <Modal onClose={() => setOpen(false)}>Hello from Modal</Modal>}
+    </div>
+  );
+}
