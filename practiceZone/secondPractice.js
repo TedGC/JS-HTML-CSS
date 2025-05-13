@@ -162,3 +162,49 @@ function TodoList() {
     setTodos(newTodos);
   };
 
+
+   const filtered = todos.filter(todo => filter === 'all' || (filter === 'done' ? todo.done : !todo.done));
+
+  return (
+    <div>
+      <input value={input} onChange={e => setInput(e.target.value)} />
+      <button onClick={addTodo}>Add</button>
+      <select onChange={e => setFilter(e.target.value)}>
+        <option value="all">All</option>
+        <option value="done">Done</option>
+        <option value="notdone">Not Done</option>
+      </select>
+      <ul>
+        {filtered.map((todo, i) => (
+          <li key={i} onClick={() => toggle(i)} style={{ textDecoration: todo.done ? 'line-through' : '' }}>
+            {todo.text}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+7. Optimized Expensive Calculation with useMemo
+jsx
+Copy
+Edit
+import React, { useState, useMemo } from 'react';
+
+function ExpensiveComponent() {
+  const [num, setNum] = useState(0);
+  const [inc, setInc] = useState(0);
+
+  const factorial = useMemo(() => {
+    console.log('Calculating factorial...');
+    const fact = (n) => (n <= 1 ? 1 : n * fact(n - 1));
+    return fact(num);
+  }, [num]);
+
+  return (
+    <div>
+      <input type="number" value={num} onChange={e => setNum(+e.target.value)} />
+      <div>Factorial: {factorial}</div>
+      <button onClick={() => setInc(inc + 1)}>Re-render</button>
+    </div>
+  );
+}
