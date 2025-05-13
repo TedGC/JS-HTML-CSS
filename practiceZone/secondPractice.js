@@ -24,4 +24,33 @@ function DebouncedSearch() {
       </ul>
     </div>
   );
+  \
+
+
+  import React, { useState } from 'react';
+
+function DynamicForm() {
+  const [fields, setFields] = useState([{ value: '' }]);
+
+  const addField = () => setFields([...fields, { value: '' }]);
+  const updateField = (index, value) => {
+    const newFields = [...fields];
+    newFields[index].value = value;
+    setFields(newFields);
+  };
+
+  return (
+    <div>
+      {fields.map((field, i) => (
+        <input
+          key={i}
+          value={field.value}
+          onChange={(e) => updateField(i, e.target.value)}
+        />
+      ))}
+      <button onClick={addField}>Add Field</button>
+    </div>
+  );
+}
+
 }
