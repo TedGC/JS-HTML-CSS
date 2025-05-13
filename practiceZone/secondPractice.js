@@ -138,3 +138,27 @@ function PaginatedList() {
   );
 }
 
+
+
+import React, { useState, useEffect } from 'react';
+
+function TodoList() {
+  const [todos, setTodos] = useState(() => JSON.parse(localStorage.getItem('todos')) || []);
+  const [filter, setFilter] = useState('all');
+  const [input, setInput] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
+  const addTodo = () => {
+    setTodos([...todos, { text: input, done: false }]);
+    setInput('');
+  };
+
+  const toggle = (index) => {
+    const newTodos = [...todos];
+    newTodos[index].done = !newTodos[index].done;
+    setTodos(newTodos);
+  };
+
