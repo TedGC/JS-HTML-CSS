@@ -410,3 +410,31 @@ function useDebounce(value, delay = 300) {
 
   return debounced;
 }
+
+class TaskQueue {
+  constructor(limit) {
+    this.limit = limit;
+    this.running = 0;
+    this.queue = [];
+  }
+
+  add(task) {
+    return new Promise((resolve, reject) => {
+      const run = async () => {
+        this.running++;
+        try {
+          const res = await task();
+          resolve(res);
+        } catch (e) {
+          reject(e);
+        }
+        this.running--;
+        if (this.queue.length) this.queue.shift()();
+      };
+
+      if (this.running < this.limit) run();
+      else this.queue.push(run);
+    });
+  }
+}
+
