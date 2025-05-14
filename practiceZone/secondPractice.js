@@ -373,3 +373,26 @@ function DynamicForm() {
     </form>
   );
 }
+
+
+// AuthContext.js
+import { createContext, useReducer, useContext } from "react";
+
+const AuthContext = createContext();
+
+const reducer = (state, action) => {
+  if (action.type === "LOGIN") return { user: action.payload };
+  if (action.type === "LOGOUT") return { user: null };
+  return state;
+};
+
+export function AuthProvider({ children }) {
+  const [state, dispatch] = useReducer(reducer, { user: null });
+  return (
+    <AuthContext.Provider value={{ state, dispatch }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export const useAuth = () => useContext(AuthContext);
