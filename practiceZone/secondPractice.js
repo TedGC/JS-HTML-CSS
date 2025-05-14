@@ -332,3 +332,27 @@ export function ThemeProvider({ children }) {
 }
 
 export const useTheme = () => useContext(ThemeContext);
+
+import { useRef, useEffect, useState } from "react";
+
+function LazyImage({ src, alt }) {
+  const ref = useRef();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setVisible(true);
+    });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <img
+      ref={ref}
+      src={visible ? src : ""}
+      alt={alt}
+      style={{ minHeight: 100 }}
+    />
+  );
+}
