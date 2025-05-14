@@ -356,3 +356,20 @@ function LazyImage({ src, alt }) {
     />
   );
 }
+
+
+function DynamicForm() {
+  const [form, setForm] = useState({ name: "", email: "" });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <form>
+      <input name="name" onChange={handleChange} />
+      <input name="email" onChange={handleChange} />
+      <pre>{JSON.stringify(form, null, 2)}</pre>
+    </form>
+  );
+}
