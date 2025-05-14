@@ -266,3 +266,23 @@ function FileUploader() {
     <div>
       <input type="file" onChange={(e) => upload(e.target.files[0])} />
       <progress value={progress} max="100" />
+
+
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+
+function Users() {
+  const { data, isLoading } = useQuery(["users"], () =>
+    axios.get("https://jsonplaceholder.typicode.com/users").then((res) => res.data)
+  );
+
+  if (isLoading) return <p>Loading...</p>;
+
+  return (
+    <ul>
+      {data.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+}
