@@ -438,3 +438,10 @@ class TaskQueue {
   }
 }
 
+
+
+function getTextNodes(node, result = []) {
+  if (node.nodeType === 3) result.push(node.textContent);
+  else for (let child of node.childNodes) getTextNodes(child, result);
+  return result;
+}
