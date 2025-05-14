@@ -286,3 +286,32 @@ function Users() {
     </ul>
   );
 }
+
+
+function todoReducer(state, action) {
+  switch (action.type) {
+    case "ADD": return [...state, { id: Date.now(), text: action.text }];
+    case "REMOVE": return state.filter(t => t.id !== action.id);
+    default: return state;
+  }
+}
+
+function TodoApp() {
+  const [todos, dispatch] = useReducer(todoReducer, []);
+  const [text, setText] = useState("");
+
+  return (
+    <div>
+      <input onChange={(e) => setText(e.target.value)} />
+      <button onClick={() => dispatch({ type: "ADD", text })}>Add</button>
+      <ul>
+        {todos.map(t => (
+          <li key={t.id}>
+            {t.text}
+            <button onClick={() => dispatch({ type: "REMOVE", id: t.id })}>❌</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
