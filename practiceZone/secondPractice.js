@@ -245,3 +245,24 @@ function App() {
     </div>
   );
 }
+
+
+function FileUploader() {
+  const [progress, setProgress] = useState(0);
+
+  const upload = (file) => {
+    const data = new FormData();
+    data.append("file", file);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/upload");
+    xhr.upload.onprogress = (e) => {
+      setProgress((e.loaded / e.total) * 100);
+    };
+    xhr.send(data);
+  };
+
+  return (
+    <div>
+      <input type="file" onChange={(e) => upload(e.target.files[0])} />
+      <progress value={progress} max="100" />
