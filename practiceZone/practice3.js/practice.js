@@ -50,3 +50,15 @@ function usePolling(url, interval = 3000) {
       const json = await res.json();
       if (isActive) setData(json);
     };
+
+
+    fetchData();
+    const id = setInterval(fetchData, interval);
+    return () => {
+      isActive = false;
+      clearInterval(id);
+    };
+  }, [url, interval]);
+
+  return data;
+}
