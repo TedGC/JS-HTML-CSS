@@ -445,3 +445,15 @@ function getTextNodes(node, result = []) {
   else for (let child of node.childNodes) getTextNodes(child, result);
   return result;
 }
+
+
+
+import { useEffect, useRef } from 'react';
+
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+  return ref.current;
+}
