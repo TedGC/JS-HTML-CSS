@@ -62,3 +62,22 @@ function usePolling(url, interval = 3000) {
 
   return data;
 }
+
+import { useState } from 'react';
+
+function useForm(initialValues, validate) {
+  const [values, setValues] = useState(initialValues);
+  const [errors, setErrors] = useState({});
+
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setValues(prev => ({ ...prev, [name]: value }));
+    if (validate) setErrors(validate({ ...values, [name]: value }));
+  };
+
+  return {
+    values,
+    errors,
+    handleChange
+  };
+}
