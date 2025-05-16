@@ -144,3 +144,18 @@ function useOnScreen(options) {
 
   return [ref, visible];
 }
+
+import { useEffect, useState } from 'react';
+
+function useDarkMode() {
+  const [enabled, setEnabled] = useState(() => {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  useEffect(() => {
+    const className = 'dark-mode';
+    document.body.classList.toggle(className, enabled);
+  }, [enabled]);
+
+  return [enabled, setEnabled];
+}
