@@ -36,3 +36,17 @@ function useInterval(callback, delay) {
     return () => clearInterval(id);
   }, [delay]);
 }
+
+import { useEffect, useState } from 'react';
+
+function usePolling(url, interval = 3000) {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    let isActive = true;
+
+    const fetchData = async () => {
+      const res = await fetch(url);
+      const json = await res.json();
+      if (isActive) setData(json);
+    };
