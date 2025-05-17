@@ -282,3 +282,29 @@ function Counter() {
     </div>
   );
 }
+
+import React, { createContext, useContext, useReducer } from 'react';
+
+const StateContext = createContext();
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    default:
+      return state;
+  }
+};
+
+export function StateProvider({ children }) {
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
+  return (
+    <StateContext.Provider value={{ state, dispatch }}>
+      {children}
+    </StateContext.Provider>
+  );
+}
+
+export function useAppState() {
+  return useContext(StateContext);
+}
