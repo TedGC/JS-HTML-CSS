@@ -181,3 +181,27 @@ function useFetch(url) {
 
   return { data, error };
 }
+
+function DynamicForm({ schema, onSubmit }) {
+  const [formData, setFormData] = useState({});
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  }
+
+  return (
+    <form onSubmit={e => {
+      e.preventDefault();
+      onSubmit(formData);
+    }}>
+      {schema.map(field => (
+        <div key={field.name}>
+          <label>{field.label}</label>
+          <input name={field.name} type={field.type} onChange={handleChange} />
+        </div>
+      ))}
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
