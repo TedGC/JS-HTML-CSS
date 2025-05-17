@@ -227,3 +227,25 @@ function withLogger(WrappedComponent) {
     return <WrappedComponent {...props} />;
   };
 }
+
+import { useEffect } from 'react';
+import ReactDOM from 'react-dom';
+
+function Modal({ children, onClose }) {
+  useEffect(() => {
+    function onEscape(e) {
+      if (e.key === 'Escape') onClose();
+    }
+    window.addEventListener('keydown', onEscape);
+    return () => window.removeEventListener('keydown', onEscape);
+  }, [onClose]);
+
+  return ReactDOM.createPortal(
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={e => e.stopPropagation()}>
+        {children}
+      </div>
+    </div>,
+    document.getElementById('modal-root')
+  );
+}
