@@ -321,3 +321,25 @@ function MouseTracker({ render }) {
 
 // Usage
 <MouseTracker render={({ x, y }) => <h1>Mouse at {x}, {y}</h1>} />
+
+import { useState } from 'react';
+import { useTransition, animated } from '@react-spring/web';
+
+function ToggleList() {
+  const [visible, setVisible] = useState(true);
+
+  const transitions = useTransition(visible, {
+    from: { opacity: 0, transform: 'translateY(-10px)' },
+    enter: { opacity: 1, transform: 'translateY(0)' },
+    leave: { opacity: 0, transform: 'translateY(-10px)' }
+  });
+
+  return (
+    <div>
+      <button onClick={() => setVisible(v => !v)}>Toggle</button>
+      {transitions((style, item) =>
+        item ? <animated.div style={style}>Hello World</animated.div> : null
+      )}
+    </div>
+  );
+}
