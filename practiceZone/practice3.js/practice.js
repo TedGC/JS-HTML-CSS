@@ -264,3 +264,21 @@ function useOnClickOutside(ref, handler) {
     return () => document.removeEventListener('mousedown', handleClick);
   }, [ref, handler]);
 }
+
+const Button = React.memo(({ onClick, label }) => {
+  console.log('Rendering:', label);
+  return <button onClick={onClick}>{label}</button>;
+});
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  const increment = useCallback(() => setCount(c => c + 1), []);
+
+  return (
+    <div>
+      <p>{count}</p>
+      <Button onClick={increment} label="Increment" />
+    </div>
+  );
+}
