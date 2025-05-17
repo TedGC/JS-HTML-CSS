@@ -205,3 +205,15 @@ function DynamicForm({ schema, onSubmit }) {
     </form>
   );
 }
+
+import React, { Suspense, lazy } from 'react';
+
+const LazyComponent = lazy(() => import('./MyHeavyComponent'));
+
+function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LazyComponent />
+    </Suspense>
+  );
+}
