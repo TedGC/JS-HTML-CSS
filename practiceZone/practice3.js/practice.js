@@ -159,3 +159,25 @@ function useDarkMode() {
 
   return [enabled, setEnabled];
 }
+
+import { useEffect, useState } from 'react';
+
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetch(url, { signal: controller.signal })
+      .then(res => res.json())
+      .then(setData)
+      .catch(err => {
+        if (err.name !== 'AbortError') setError(err);
+      });
+
+    return () => controller.abort();
+  }, [url]);
+
+  return { data, error };
+}
