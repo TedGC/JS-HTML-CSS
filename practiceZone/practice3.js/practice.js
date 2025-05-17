@@ -217,3 +217,13 @@ function App() {
     </Suspense>
   );
 }
+
+function withLogger(WrappedComponent) {
+  return function(props) {
+    useEffect(() => {
+      console.log(`${WrappedComponent.name} mounted`);
+      return () => console.log(`${WrappedComponent.name} unmounted`);
+    }, []);
+    return <WrappedComponent {...props} />;
+  };
+}
