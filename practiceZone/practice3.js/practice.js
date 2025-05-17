@@ -308,3 +308,16 @@ export function StateProvider({ children }) {
 export function useAppState() {
   return useContext(StateContext);
 }
+
+function MouseTracker({ render }) {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  return (
+    <div onMouseMove={e => setPosition({ x: e.clientX, y: e.clientY })}>
+      {render(position)}
+    </div>
+  );
+}
+
+// Usage
+<MouseTracker render={({ x, y }) => <h1>Mouse at {x}, {y}</h1>} />
