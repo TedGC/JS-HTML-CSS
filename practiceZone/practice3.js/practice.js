@@ -543,3 +543,19 @@ function DebouncedSearch() {
         .then((data) => setResults(data));
     }
   }, [debounced]);
+
+    return (
+    <div>
+      <input
+        placeholder="Search TV Shows"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      <ul>
+        {results.map((r) => (
+          <li key={r.show.id}>{r.show.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
