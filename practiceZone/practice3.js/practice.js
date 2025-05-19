@@ -594,3 +594,20 @@ function InfiniteScrollList() {
     </div>
   );
 }
+
+import { useState } from "react";
+
+function FakeLogin() {
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
+  const [email, setEmail] = useState("");
+  const [pw, setPw] = useState("");
+
+  const login = () => {
+    if (email === "test@example.com" && pw === "1234") {
+      const fakeToken = "abc123";
+      setToken(fakeToken);
+      localStorage.setItem("token", fakeToken);
+    } else {
+      alert("Invalid credentials");
+    }
+  };
