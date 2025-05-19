@@ -522,3 +522,24 @@ function Counter() {
     </div>
   );
 }
+
+
+import { useEffect, useState } from "react";
+
+function DebouncedSearch() {
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [debounced, setDebounced] = useState("");
+
+  useEffect(() => {
+    const handler = setTimeout(() => setDebounced(query), 500);
+    return () => clearTimeout(handler);
+  }, [query]);
+
+  useEffect(() => {
+    if (debounced) {
+      fetch(`https://api.tvmaze.com/search/shows?q=${debounced}`)
+        .then((res) => res.json())
+        .then((data) => setResults(data));
+    }
+  }, [debounced]);
