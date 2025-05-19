@@ -559,3 +559,21 @@ function DebouncedSearch() {
     </div>
   );
 }
+
+import { useEffect, useRef, useState } from "react";
+
+function InfiniteScrollList() {
+  const [items, setItems] = useState(Array.from({ length: 20 }));
+  const [page, setPage] = useState(1);
+  const loader = useRef();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setItems((prev) => [...prev, ...Array.from({ length: 20 })]);
+          setPage((p) => p + 1);
+        }
+      },
+      { threshold: 1 }
+    );
