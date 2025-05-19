@@ -480,3 +480,33 @@ function MouseTracker() {
 
   return <p>Mouse: {pos.x}, {pos.y}</p>;
 }
+
+import { useState } from "react";
+
+function MultiStepForm() {
+  const [step, setStep] = useState(1);
+  const [form, setForm] = useState({ name: "", email: "" });
+
+  return (
+    <div>
+      {step === 1 && (
+        <input
+          placeholder="Name"
+          value={form.name}
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+        />
+      )}
+      {step === 2 && (
+        <input
+          placeholder="Email"
+          value={form.email}
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
+        />
+      )}
+      <button onClick={() => setStep(step === 2 ? 1 : 2)}>
+        {step === 2 ? "Back" : "Next"}
+      </button>
+      {step === 2 && <pre>{JSON.stringify(form, null, 2)}</pre>}
+    </div>
+  );
+}
