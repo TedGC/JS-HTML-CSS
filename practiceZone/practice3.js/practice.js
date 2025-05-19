@@ -408,3 +408,15 @@ function Users() {
     </ul>
   );
 }
+
+import { useState } from "react";
+
+function DarkMode() {
+  const [dark, setDark] = useState(false);
+
+  return (
+    <div style={{ background: dark ? "#222" : "#fff", color: dark ? "#fff" : "#000", padding: "2rem" }}>
+      <button onClick={() => setDark(!dark)}>Toggle Dark Mode</button>
+    </div>
+  );
+}
