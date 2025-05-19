@@ -362,3 +362,29 @@ function NameForm() {
     </form>
   );
 }
+
+import { useState } from "react";
+
+function TodoList() {
+  const [task, setTask] = useState("");
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = () => {
+    setTodos([...todos, task]);
+    setTask("");
+  };
+
+  return (
+    <div>
+      <input value={task} onChange={(e) => setTask(e.target.value)} />
+      <button onClick={addTodo}>Add</button>
+      <ul>
+        {todos.map((t, i) => (
+          <li key={i} onClick={() => setTodos(todos.filter((_, j) => j !== i))}>
+            {t}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
