@@ -448,3 +448,21 @@ function Accordion({ title, children }) {
     </div>
   );
 }
+
+import { useState } from "react";
+
+function ModalExample() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setOpen(true)}>Open Modal</button>
+      {open && (
+        <div style={{ background: "#0008", padding: "2rem", color: "#fff" }}>
+          <p>This is a modal!</p>
+          <button onClick={() => setOpen(false)}>Close</button>
+        </div>
+      )}
+    </div>
+  );
+}
