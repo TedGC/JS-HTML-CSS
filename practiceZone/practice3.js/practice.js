@@ -435,3 +435,16 @@ function Timer() {
 
   return <h2>Time: {seconds}s</h2>;
 }
+
+import { useState } from "react";
+
+function Accordion({ title, children }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div>
+      <h3 onClick={() => setOpen(!open)}>{title}</h3>
+      {open && <div>{children}</div>}
+    </div>
+  );
+}
