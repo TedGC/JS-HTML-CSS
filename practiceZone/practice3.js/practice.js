@@ -577,3 +577,20 @@ function InfiniteScrollList() {
       },
       { threshold: 1 }
     );
+
+
+     if (loader.current) observer.observe(loader.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div>
+      {items.map((_, i) => (
+        <div key={i} style={{ padding: 20, borderBottom: "1px solid #ccc" }}>
+          Item #{i + 1}
+        </div>
+      ))}
+      <div ref={loader}>Loading more...</div>
+    </div>
+  );
+}
