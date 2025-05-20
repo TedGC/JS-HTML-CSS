@@ -611,3 +611,17 @@ function FakeLogin() {
       alert("Invalid credentials");
     }
   };
+
+
+  function debounce(fn, delay) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  };
+}
+
+// Usage
+const log = debounce((msg) => console.log(msg), 1000);
+log("hello");
+log("world"); // Only "world" logs after 1s
