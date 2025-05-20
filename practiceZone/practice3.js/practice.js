@@ -707,3 +707,24 @@ Array.prototype.myFilter = function (cb) {
 };
 
 console.log([1, 2, 3, 4].myFilter((n) => n % 2 === 0)); // [2, 4]
+
+
+function promiseAll(promises) {
+  return new Promise((resolve, reject) => {
+    const results = [];
+    let completed = 0;
+    promises.forEach((p, i) => {
+      Promise.resolve(p).then(
+        (val) => {
+          results[i] = val;
+          completed++;
+          if (completed === promises.length) resolve(results);
+        },
+        reject
+      );
+    });
+  });
+}
+
+// Usage
+promiseAll([Promise.resolve(1), Promise.resolve(2)]).then(console.log);
