@@ -641,3 +641,19 @@ function deepClone(obj) {
 const a = { x: 1, y: { z: 2 } };
 const b = deepClone(a);
 console.log(b); // { x: 1, y: { z: 2 } }
+
+function memoize(fn) {
+  const cache = {};
+  return function (n) {
+    if (cache[n]) return cache[n];
+    const result = fn(n);
+    cache[n] = result;
+    return result;
+  };
+}
+
+const fib = memoize((n) =>
+  n < 2 ? n : fib(n - 1) + fib(n - 2)
+);
+
+console.log(fib(30)); // Fast thanks to memoization
