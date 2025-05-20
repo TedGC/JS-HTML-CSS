@@ -680,3 +680,20 @@ function throttle(fn, interval) {
 // Usage
 const log = throttle(() => console.log("Throttled!"), 2000);
 log(); log(); // Only one will run
+
+function groupBy(arr, key) {
+  return arr.reduce((result, item) => {
+    const group = item[key];
+    result[group] = result[group] || [];
+    result[group].push(item);
+    return result;
+  }, {});
+}
+
+const data = [
+  { type: 'fruit', name: 'apple' },
+  { type: 'vegetable', name: 'carrot' },
+  { type: 'fruit', name: 'banana' }
+];
+
+console.log(groupBy(data, 'type'));
