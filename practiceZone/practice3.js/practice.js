@@ -657,3 +657,11 @@ const fib = memoize((n) =>
 );
 
 console.log(fib(30)); // Fast thanks to memoization
+
+function sum(a) {
+  const inner = (b) => sum(a + b);
+  inner.valueOf = () => a;
+  return inner;
+}
+
+console.log(+sum(1)(2)(3)); // 6
