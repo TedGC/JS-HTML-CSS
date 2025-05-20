@@ -728,3 +728,15 @@ function promiseAll(promises) {
 
 // Usage
 promiseAll([Promise.resolve(1), Promise.resolve(2)]).then(console.log);
+
+class LRUCache {
+  constructor(limit = 5) {
+    this.cache = new Map();
+    this.limit = limit;
+  }
+
+  get(key) {
+    if (!this.cache.has(key)) return -1;
+    const value = this.cache.get(key);
+    this.cache.delete(key);
+    this.cache.set(ke
