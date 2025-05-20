@@ -697,3 +697,13 @@ const data = [
 ];
 
 console.log(groupBy(data, 'type'));
+
+Array.prototype.myFilter = function (cb) {
+  const result = [];
+  for (let i = 0; i < this.length; i++) {
+    if (cb(this[i], i, this)) result.push(this[i]);
+  }
+  return result;
+};
+
+console.log([1, 2, 3, 4].myFilter((n) => n % 2 === 0)); // [2, 4]
