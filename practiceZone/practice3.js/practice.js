@@ -665,3 +665,18 @@ function sum(a) {
 }
 
 console.log(+sum(1)(2)(3)); // 6
+
+function throttle(fn, interval) {
+  let last = 0;
+  return (...args) => {
+    const now = Date.now();
+    if (now - last >= interval) {
+      last = now;
+      fn(...args);
+    }
+  };
+}
+
+// Usage
+const log = throttle(() => console.log("Throttled!"), 2000);
+log(); log(); // Only one will run
