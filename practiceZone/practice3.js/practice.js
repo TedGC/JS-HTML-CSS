@@ -625,3 +625,19 @@ function FakeLogin() {
 const log = debounce((msg) => console.log(msg), 1000);
 log("hello");
 log("world"); // Only "world" logs after 1s
+
+
+function deepClone(obj) {
+  if (obj === null || typeof obj !== "object") return obj;
+  if (Array.isArray(obj)) return obj.map(deepClone);
+
+  const clone = {};
+  for (let key in obj) {
+    clone[key] = deepClone(obj[key]);
+  }
+  return clone;
+}
+
+const a = { x: 1, y: { z: 2 } };
+const b = deepClone(a);
+console.log(b); // { x: 1, y: { z: 2 } }
