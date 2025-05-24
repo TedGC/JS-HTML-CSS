@@ -824,3 +824,13 @@ const FancyInput = forwardRef((_, ref) => {
   }));
   return <input ref={inputRef} />;
 });
+
+export default function App() {
+  const ref = useRef();
+  return (
+    <>
+      <FancyInput ref={ref} />
+      <button onClick={() => ref.current.focus()}>Focus</button>
+    </>
+  );
+}
