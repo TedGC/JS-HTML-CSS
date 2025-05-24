@@ -814,3 +814,13 @@ function Modal({ children }) {
     document.getElementById('modal-root')
   );
 }
+
+import React, { useRef, forwardRef, useImperativeHandle } from 'react';
+
+const FancyInput = forwardRef((_, ref) => {
+  const inputRef = useRef();
+  useImperativeHandle(ref, () => ({
+    focus: () => inputRef.current.focus()
+  }));
+  return <input ref={inputRef} />;
+});
