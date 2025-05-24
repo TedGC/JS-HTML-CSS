@@ -879,3 +879,23 @@ class ErrorBoundary extends React.Component {
     return this.state.hasError ? <h1>Something went wrong.</h1> : this.props.children;
   }
 }
+
+
+import { useMemo, useState } from 'react';
+
+export default function ExpensiveComponent() {
+  const [count, setCount] = useState(0);
+
+  const expensiveCalc = useMemo(() => {
+    let total = 0;
+    for (let i = 0; i < 1e7; i++) total += i;
+    return total;
+  }, []);
+
+  return (
+    <>
+      <p>Expensive value: {expensiveCalc}</p>
+      <button onClick={() => setCount(c => c + 1)}>Increment: {count}</button>
+    </>
+  );
+}
