@@ -756,3 +756,15 @@ cache.put('b', 2);
 console.log(cache.get('a')); // 1
 cache.put('c', 3);
 console.log(cache.get('b')); // -1 (evicted)
+
+
+import { useState, useEffect } from 'react';
+
+function useDebounce(value, delay) {
+  const [debounced, setDebounced] = useState(value);
+  useEffect(() => {
+    const handler = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(handler);
+  }, [value, delay]);
+  return debounced;
+}
