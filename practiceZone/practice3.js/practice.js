@@ -899,3 +899,31 @@ export default function ExpensiveComponent() {
     </>
   );
 }
+
+import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+
+function DraggableItem({ name }) {
+  const [, drag] = useDrag(() => ({
+    type: 'ITEM',
+    item: { name }
+  }));
+  return <div ref={drag}>{name}</div>;
+}
+
+function DropZone({ onDrop }) {
+  const [, drop] = useDrop(() => ({
+    accept: 'ITEM',
+    drop: (item) => onDrop(item.name)
+  }));
+  return <div ref={drop} style={{ border: '1px solid black', padding: '20px' }}>Drop Here</div>;
+}
+
+export default function App() {
+  return (
+    <DndProvider backend={HTML5Backend}>
+      <DraggableItem name="Box A" />
+      <DropZone onDrop={(name) => alert(`Dropped: ${name}`)} />
+    </DndProvider>
+  );
+}
