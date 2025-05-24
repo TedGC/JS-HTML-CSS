@@ -781,3 +781,14 @@ function reducer(state, action) {
     default: return state;
   }
 }
+
+export function StateProvider({ children }) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <StateContext.Provider value={{ state, dispatch }}>
+      {children}
+    </StateContext.Provider>
+  );
+}
+
+export const useStateContext = () => useContext(StateContext);
