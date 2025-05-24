@@ -824,6 +824,20 @@ const FancyInput = forwardRef((_, ref) => {
   }));
   return <input ref={inputRef} />;
 });
+<<<<<<< HEAD
+
+import { useState } from 'react';
+
+export default function DynamicForm() {
+  const [fields, setFields] = useState(['']);
+
+  const handleChange = (i, value) => {
+    const newFields = [...fields];
+    newFields[i] = value;
+    setFields(newFields);
+  };
+
+=======
 
 export default function App() {
   const ref = useRef();
@@ -831,6 +845,18 @@ export default function App() {
     <>
       <FancyInput ref={ref} />
       <button onClick={() => ref.current.focus()}>Focus</button>
+    </>
+  );
+}
+>>>>>>> a820255c76f9d9ca4723baee5b2beb9218169ad3
+
+
+  return (
+    <>
+      {fields.map((field, i) => (
+        <input key={i} value={field} onChange={e => handleChange(i, e.target.value)} />
+      ))}
+      <button onClick={() => setFields([...fields, ''])}>Add Field</button>
     </>
   );
 }
