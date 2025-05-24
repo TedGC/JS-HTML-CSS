@@ -792,3 +792,16 @@ export function StateProvider({ children }) {
 }
 
 export const useStateContext = () => useContext(StateContext);
+
+
+import React, { Suspense, lazy } from 'react';
+
+const LazyComponent = lazy(() => import('./LazyComponent'));
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LazyComponent />
+    </Suspense>
+  );
+}
