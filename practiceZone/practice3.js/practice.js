@@ -954,3 +954,13 @@ const filtered = posts.filter(post =>
 import { useParams } from 'react-router-dom';
 const { id } = useParams();
 const post = posts.find(p => p.id === parseInt(id))
+
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'ADD': return [...state, action.payload];
+    case 'DELETE': return state.filter(p => p.id !== action.payload);
+    default: return state;
+  }
+};
+const [posts, dispatch] = useReducer(reducer, []);
