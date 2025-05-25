@@ -1001,3 +1001,5 @@ const useFetch = (url) => {
   }, [url]);
   return data;
 };
+
+{loading ? <Spinner /> : posts.map(p => <BlogCard key={p.id} post={p} />)}
