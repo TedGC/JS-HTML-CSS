@@ -937,8 +937,20 @@ useEffect(() => {
   window.addEventListener('scroll', handleScroll);
   return () => window.removeEventListener('scroll', handleScroll);
 }, []);
+<<<<<<< HEAD
+
+
+const ThemeContext = createContext();
+export const useTheme = () => useContext(ThemeContext);
+=======
 
 
 const filtered = posts.filter(post =>
   post.title.toLowerCase().includes(search.toLowerCase())
 );
+>>>>>>> ad203a93f447c8a615fc94ed65f68bfdd1f4dce2
+
+
+import { useParams } from 'react-router-dom';
+const { id } = useParams();
+const post = posts.find(p => p.id === parseInt(id))
