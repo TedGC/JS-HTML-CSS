@@ -937,3 +937,8 @@ useEffect(() => {
   window.addEventListener('scroll', handleScroll);
   return () => window.removeEventListener('scroll', handleScroll);
 }, []);
+
+
+const filtered = posts.filter(post =>
+  post.title.toLowerCase().includes(search.toLowerCase())
+);
