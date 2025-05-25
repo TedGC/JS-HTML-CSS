@@ -927,3 +927,13 @@ export default function App() {
     </DndProvider>
   );
 }
+
+useEffect(() => {
+  const handleScroll = () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+      loadMorePosts(); // pagination logic
+    }
+  };
+  window.addEventListener('scroll', handleScroll);
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []);
