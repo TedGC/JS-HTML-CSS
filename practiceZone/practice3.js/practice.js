@@ -964,3 +964,11 @@ const reducer = (state, action) => {
   }
 };
 const [posts, dispatch] = useReducer(reducer, []);
+
+
+
+const Spinner = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="animate-spin h-12 w-12 border-4 border-white border-t-transparent rounded-full" />
+  </div>
+);
