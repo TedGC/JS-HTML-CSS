@@ -972,3 +972,13 @@ const Spinner = () => (
     <div className="animate-spin h-12 w-12 border-4 border-white border-t-transparent rounded-full" />
   </div>
 );
+
+
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+export default function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
